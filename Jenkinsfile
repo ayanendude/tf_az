@@ -30,5 +30,10 @@ pipeline {
         sh "/usr/local/bin/terraform plan"
       }
     }
+    stage('approval') {
+      timeout(time: 10, unit: 'MINUTES') {
+      input message: "Does Pre-Production look good?"
+      }
+    }
   }
 }
