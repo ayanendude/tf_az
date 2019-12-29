@@ -15,6 +15,11 @@ pipeline {
         sh "/usr/local/bin/terraform --version"
         sh "/usr/local/bin/terraform init"
       }
+      steps {
+        echo 'hello1'
+        sh "/usr/local/bin/terraform --version"
+        sh "/usr/local/bin/terraform init"
+      }
     }
     stage('plan') {
       steps {
