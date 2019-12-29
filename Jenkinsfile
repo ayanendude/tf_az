@@ -1,3 +1,5 @@
+import groovy.json.terraform
+
 pipeline {
   agent any
   stages {
