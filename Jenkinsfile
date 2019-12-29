@@ -19,7 +19,7 @@ pipeline {
     stage('plan') {
       steps {
         echo 'hello'
-        terraform plan
+        sh "/usr/local/bin/terraform init"
       }
     }
   }
