@@ -6,6 +6,7 @@ pipeline {
     stage('checkout') {
       steps {
         echo 'hello'
+        sh "pwd"
         checkout scm
       }
     }
