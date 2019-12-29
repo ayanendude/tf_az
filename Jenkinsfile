@@ -31,9 +31,12 @@ pipeline {
       }
     }
     stage('approval') {
-      timeout(time: 10, unit: 'MINUTES') {
-      input message: "Does Pre-Production look good?"
+      steps{
+        timeout(time: 10, unit: 'MINUTES') {
+        input message: "Does Pre-Production look good?"
+        }
       }
+
     }
   }
 }
