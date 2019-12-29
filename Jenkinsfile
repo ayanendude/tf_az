@@ -12,12 +12,12 @@ pipeline {
     stage('parallel tasks') {
       steps {
         parallel(
-          {
+          a :  {
             echo 'hello'
             sh "/usr/local/bin/terraform --version"
             sh "/usr/local/bin/terraform init"
           },
-          {
+          b : {
             echo 'hello1'
             sh "/usr/local/bin/terraform --version"
             sh "/usr/local/bin/terraform init"
