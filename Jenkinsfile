@@ -9,16 +9,20 @@ pipeline {
         checkout scm
       }
     }
-    stage('init') {
+    stage('parallel tasks') {
       steps {
-        echo 'hello'
-        sh "/usr/local/bin/terraform --version"
-        sh "/usr/local/bin/terraform init"
-      }
-      steps {
-        echo 'hello1'
-        sh "/usr/local/bin/terraform --version"
-        sh "/usr/local/bin/terraform init"
+        parallel(
+          {
+            echo 'hello'
+            sh "/usr/local/bin/terraform --version"
+            sh "/usr/local/bin/terraform init"
+          },
+          {
+            echo 'hello1'
+            sh "/usr/local/bin/terraform --version"
+            sh "/usr/local/bin/terraform init"
+          }
+        )
       }
     }
     stage('plan') {
