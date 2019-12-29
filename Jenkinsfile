@@ -40,7 +40,7 @@ pipeline {
     stage('Create Resource') {
       steps {
         echo 'Creating Resources'
-        sh "terraform apply"
+        sh "terraform apply -auto-approve"
       }
     }
   }
