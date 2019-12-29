@@ -3,40 +3,45 @@ import groovy.json.JsonOutput
 pipeline {
   agent any
   stages {
-    stage('checkout') {
+    stage('SCM checkout') {
       steps {
-        echo 'hello'
+        echo 'Checkout'
         sh "pwd"
         checkout scm
       }
     }
-    stage('parallel tasks') {
+    stage('Initial parallel tasks') {
       steps {
         parallel(
-          a :  {
-            echo 'hello'
+          Version :  {
+            echo 'Version check'
             sh "/usr/local/bin/terraform --version"
           },
-          b : {
-            echo 'hello1'
+          Init : {
+            echo 'Init TF'
             sh "/usr/local/bin/terraform init"
           }
         )
       }
     }
-    stage('plan') {
+    stage('Plan') {
       steps {
-        echo 'hello'
+        echo 'Executing Plan'
         sh "/usr/local/bin/terraform plan"
       }
     }
-    stage('approval') {
+    stage('Approval') {
       steps{
         timeout(time: 10, unit: 'MINUTES') {
-        input message: "Does Pre-Production look good?"
+        input message: "Does Plan look good?"
         }
       }
-
+    }
+    stage('Create Resource') {
+      steps {
+        echo 'Creating Resources'
+        sh "terraform apply"
+      }
     }
   }
 }
