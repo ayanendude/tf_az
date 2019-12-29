@@ -12,7 +12,8 @@ pipeline {
     stage('init') {
       steps {
         echo 'hello'
-        terraform init
+        sh "terraform --version"
+        sh "terraform init"
       }
     }
     stage('plan') {
