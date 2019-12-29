@@ -7,6 +7,17 @@ pipeline {
         checkout scm
       }
     }
-
+    stage('init') {
+      steps {
+        echo 'hello'
+        terraform init
+      }
+    }
+    stage('plan') {
+      steps {
+        echo 'hello'
+        terraform plan
+      }
+    }
   }
 }
