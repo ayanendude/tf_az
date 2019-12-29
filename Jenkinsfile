@@ -27,7 +27,7 @@ pipeline {
     stage('plan') {
       steps {
         echo 'hello'
-        sh "sudo /usr/local/bin/terraform plan"
+        sh "/usr/local/bin/terraform plan"
       }
     }
   }
