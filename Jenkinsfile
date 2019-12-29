@@ -1,4 +1,4 @@
-import groovy.json.terraform
+import groovy.json
 
 pipeline {
   agent any
