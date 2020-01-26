@@ -27,13 +27,11 @@ pipeline {
     stage('Plan') {
 
       steps {
-              script {
-              def INPUT_PARAMS = input(message: 'Please Provide Parameters', ok: 'Next',
+        script {
+          def INPUT_PARAMS = input(message: 'Please Provide Action', ok: 'Next',
                                         parameters: [
-                                        choice(name: 'ENVIRONMENT', choices: ['dev','qa'].join('\n'), description: 'Please select the Environment'),
-                                        choice(name: 'ENVIRONMENT1', choices: ['dev','qa'].join('\n'), description: 'Please select the Environment')])
-                        env.ENVIRONMENT = INPUT_PARAMS.ENVIRONMENT
-                        env.IMAGE_TAG = INPUT_PARAMS.ENVIRONMENT1
+                                        choice(name: 'Action', choices: ['apply','destroy'].join('\n'), description: 'Please select the Action')])
+          env.Action = INPUT_PARAMS.Action
       }
         echo 'Executing Plan'
         sh "terraform plan"
@@ -49,7 +47,7 @@ pipeline {
     stage('Create Resource') {
       steps {
         echo 'Creating Resources'
-        sh "terraform apply -auto-approve"
+        sh "terraform ${env.Action} -auto-approve"
       }
     }
   }
