@@ -27,7 +27,7 @@ pipeline {
     stage('Plan') {
       steps {
         echo 'Executing Plan'
-        sh "/usr/local/bin/terraform plan"
+        sh "terraform plan"
       }
     }
     stage('Approval') {
