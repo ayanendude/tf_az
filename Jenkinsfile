@@ -25,7 +25,9 @@ pipeline {
       }
     }
     stage('Plan') {
-      script {
+
+      steps {
+              script {
               def INPUT_PARAMS = input(message: 'Please Provide Parameters', ok: 'Next',
                                         parameters: [
                                         choice(name: 'ENVIRONMENT', choices: ['dev','qa'].join('\n'), description: 'Please select the Environment'),
@@ -33,7 +35,6 @@ pipeline {
                         env.ENVIRONMENT = INPUT_PARAMS.ENVIRONMENT
                         env.IMAGE_TAG = INPUT_PARAMS.ENVIRONMENT1
       }
-      steps {
         echo 'Executing Plan'
         sh "terraform plan"
       }
