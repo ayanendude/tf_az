@@ -15,7 +15,7 @@ pipeline {
         parallel(
           Version :  {
             echo 'Version check'
-            sh "/usr/local/bin/terraform --version"
+            sh "terraform --version"
           },
           Init : {
             echo 'Init TF'
