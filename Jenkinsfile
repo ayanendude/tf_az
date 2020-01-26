@@ -31,7 +31,7 @@ pipeline {
           def INPUT_PARAMS = input(message: 'Please Provide Action', ok: 'Next',
                                         parameters: [
                                         choice(name: 'Action', choices: ['apply','destroy'].join('\n'), description: 'Please select the Action')])
-          env.Action = INPUT_PARAMS.Action
+          env.ACTION = INPUT_PARAMS.Action
       }
         echo 'Executing Plan'
         sh "terraform plan"
