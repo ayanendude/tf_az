@@ -54,7 +54,7 @@ resource "azurerm_virtual_machine" "http" {
 
     boot_diagnostics {
         enabled     = "true"
-        storage_uri = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
+        storage_uri = azurerm_storage_account.http.primary_blob_endpoint
     }
 
     tags = {
