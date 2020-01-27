@@ -48,9 +48,11 @@ pipeline {
     stage('Create Resource') {
       steps {
         echo 'Changing Resources'
-        if (env.ACTION == 'destroy') {
-          sh "yes | cp -rf terraform.tfstate.backup terraform.tfstate"
-        } 
+        script {
+          if (env.ACTION == 'destroy') {
+            sh "yes | cp -rf terraform.tfstate.backup terraform.tfstate"
+          } 
+        }
         sh "terraform ${env.ACTION} -auto-approve"
       }
     }
