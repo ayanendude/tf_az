@@ -8,6 +8,12 @@ pipeline {
         echo 'Checkout'
         sh "pwd"
         checkout scm
+        script {
+          env.ACTION = input(message: 'Please Provide Action', ok: 'Next',
+                                        parameters: [
+                                        choice(name: 'ACTION', choices: ['apply','destroy'].join('\n'), description: 'Please select the Action')])
+          //env.ACTION = INPUT_PARAMS.Action
+        }
       }
     }
     stage('Initial parallel tasks') {
@@ -27,12 +33,7 @@ pipeline {
     stage('Plan') {
 
       steps {
-        script {
-          env.ACTION = input(message: 'Please Provide Action', ok: 'Next',
-                                        parameters: [
-                                        choice(name: 'ACTION', choices: ['apply','destroy'].join('\n'), description: 'Please select the Action')])
-          //env.ACTION = INPUT_PARAMS.Action
-      }
+
         echo 'Executing Plan'
         sh "terraform plan"
       }
@@ -46,7 +47,10 @@ pipeline {
     }
     stage('Create Resource') {
       steps {
-        echo 'Creating Resources'
+        echo 'Changing Resources'
+        if (env.ACTION == 'destroy') {
+          sh "yes | cp -rf terraform.tfstate.backup terraform.tfstate"
+        } 
         sh "terraform ${env.ACTION} -auto-approve"
       }
     }
