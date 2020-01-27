@@ -23,7 +23,7 @@ resource "azurerm_virtual_machine" "http" {
   location              = azurerm_resource_group.generic.location
   resource_group_name   = azurerm_resource_group.generic.name
   network_interface_ids = [azurerm_network_interface.http.id]
-  vm_size               = "Standard_B1LS"
+  vm_size               = "Standard_B2S"
 
   delete_os_disk_on_termination    = true
   delete_data_disks_on_termination = true
