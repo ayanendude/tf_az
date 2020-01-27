@@ -23,7 +23,7 @@ resource "azurerm_virtual_machine" "http" {
   location              = azurerm_resource_group.generic.location
   resource_group_name   = azurerm_resource_group.generic.name
   network_interface_ids = [azurerm_network_interface.http.id]
-  vm_size               = "Standard_A1_v2"
+  vm_size               = "Standard_B1LS"
 
   delete_os_disk_on_termination    = true
   delete_data_disks_on_termination = true
@@ -49,6 +49,36 @@ resource "azurerm_virtual_machine" "http" {
   }
 
   os_profile_linux_config {
-    disable_password_authentication = false
+    disable_password_authentication = true
   }
+
+    boot_diagnostics {
+        enabled     = "true"
+        storage_uri = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
+    }
+
+    tags = {
+        environment = "Terraform Demo"
+    }
+}
+
+resource "azurerm_storage_account" "http" {
+    name                        = "diag${random_id.randomId.hex}"
+    resource_group_name         = azurerm_resource_group.generic.name
+    location                    = "eastus"
+    account_replication_type    = "LRS"
+    account_tier                = "Standard"
+
+    tags = {
+        environment = "Terraform Demo"
+    }
+}
+
+resource "random_id" "randomId" {
+    keepers = {
+        # Generate a new ID only when a new resource group is defined
+        resource_group = azurerm_resource_group.generic.name
+    }
+    
+    byte_length = 8
 }
