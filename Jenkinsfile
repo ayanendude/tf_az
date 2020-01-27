@@ -45,7 +45,7 @@ pipeline {
         }
       }
     }
-    stage('Create Resource') {
+    stage('Change Resource') {
       steps {
         echo 'Changing Resources'
         script {
