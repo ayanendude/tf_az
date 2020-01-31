@@ -3,6 +3,7 @@ resource "azurerm_public_ip" "http" {
   location            = azurerm_resource_group.generic.location
   resource_group_name = azurerm_resource_group.generic.name
   allocation_method   = "Dynamic"
+  sku                 = "Standard"
 }
 
 resource "azurerm_network_interface" "http" {

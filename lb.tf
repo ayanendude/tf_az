@@ -3,6 +3,7 @@ resource "azurerm_public_ip" "httplb" {
   location            = "eastus"
   resource_group_name = "${azurerm_resource_group.generic.name}"
   allocation_method   = "Static"
+  sku                 = "Standard"
 }
 
 resource "azurerm_lb" "http" {
@@ -32,6 +33,7 @@ resource "azurerm_lb_rule" "http" {
   frontend_port                  = 3389
   backend_port                   = 3389
   frontend_ip_configuration_name = "PublicIPAddress"
+  disable_outbound_snat          = true
 }
 
 resource "azurerm_lb_outbound_rule" "http" {

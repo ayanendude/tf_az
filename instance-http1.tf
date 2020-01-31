@@ -3,6 +3,7 @@ resource "azurerm_public_ip" "http1" {
   location            = azurerm_resource_group.generic.location
   resource_group_name = azurerm_resource_group.generic.name
   allocation_method   = "Dynamic"
+  sku                 = "Standard"
 }
 
 resource "azurerm_network_interface" "http1" {
@@ -14,7 +15,7 @@ resource "azurerm_network_interface" "http1" {
     name                          = "testconfiguration1"
     subnet_id                     = azurerm_subnet.http.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.http.id
+    public_ip_address_id          = azurerm_public_ip.http1.id
   }
 }
 
