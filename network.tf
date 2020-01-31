@@ -13,3 +13,15 @@ resource "azurerm_subnet" "http" {
   virtual_network_name = azurerm_virtual_network.generic.name
   address_prefix       = "10.0.2.0/24"
 }
+
+/* resource "azurerm_storage_account" "http" {
+  name                     = "storageaccountname"
+  resource_group_name      = "${azurerm_resource_group.generic.name}"
+  location                 = "${azurerm_resource_group.generic.location}"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+
+  tags = {
+    environment = "staging"
+  }
+} */

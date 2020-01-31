@@ -10,6 +10,7 @@ resource "azurerm_network_interface" "http1" {
   name                = "http-nic1"
   location            = azurerm_resource_group.generic.location
   resource_group_name = azurerm_resource_group.generic.name
+  network_security_group_id = azurerm_network_security_group.http.id
 
   ip_configuration {
     name                          = "testconfiguration1"
@@ -60,7 +61,7 @@ resource "azurerm_virtual_machine" "http1" {
     }
 
     tags = {
-        environment = "Terraform Test"
+        environment = "Test"
     }
 }
 

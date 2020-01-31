@@ -10,6 +10,7 @@ resource "azurerm_network_interface" "http" {
   name                = "http-nic"
   location            = azurerm_resource_group.generic.location
   resource_group_name = azurerm_resource_group.generic.name
+  network_security_group_id = azurerm_network_security_group.http.id
 
   ip_configuration {
     name                          = "testconfiguration"
@@ -61,21 +62,11 @@ resource "azurerm_virtual_machine" "http" {
     }
 
     tags = {
-        environment = "Terraform Demo"
+        environment = "Test"
     }
 }
 
-resource "azurerm_storage_account" "http" {
-    name                        = "diag${random_id.randomId.hex}"
-    resource_group_name         = azurerm_resource_group.generic.name
-    location                    = "eastus"
-    account_replication_type    = "LRS"
-    account_tier                = "Standard"
 
-    tags = {
-        environment = "Terraform Demo"
-    }
-}
 
 resource "random_id" "randomId" {
     keepers = {
