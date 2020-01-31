@@ -1,11 +1,11 @@
-resource "azurerm_public_ip" "http" {
+resource "azurerm_public_ip" "http1" {
   name                = "http-pip"
   location            = azurerm_resource_group.generic.location
   resource_group_name = azurerm_resource_group.generic.name
   allocation_method   = "Dynamic"
 }
 
-resource "azurerm_network_interface" "http" {
+resource "azurerm_network_interface" "http1" {
   name                = "http-nic"
   location            = azurerm_resource_group.generic.location
   resource_group_name = azurerm_resource_group.generic.name
@@ -18,11 +18,11 @@ resource "azurerm_network_interface" "http" {
   }
 }
 
-resource "azurerm_virtual_machine" "http" {
-  name                  = var.vm_name
+resource "azurerm_virtual_machine" "http1" {
+  name                  = var.vm_name1
   location              = azurerm_resource_group.generic.location
   resource_group_name   = azurerm_resource_group.generic.name
-  network_interface_ids = [azurerm_network_interface.http.id]
+  network_interface_ids = [azurerm_network_interface.http1.id]
   vm_size               = "Standard_B1S"
 
   delete_os_disk_on_termination    = true
@@ -58,11 +58,11 @@ resource "azurerm_virtual_machine" "http" {
     }
 
     tags = {
-        environment = "Terraform Demo"
+        environment = "Terraform Test"
     }
 }
 
-resource "azurerm_storage_account" "http" {
+/* resource "azurerm_storage_account" "http" {
     name                        = "diag${random_id.randomId.hex}"
     resource_group_name         = azurerm_resource_group.generic.name
     location                    = "eastus"
@@ -72,13 +72,13 @@ resource "azurerm_storage_account" "http" {
     tags = {
         environment = "Terraform Demo"
     }
-}
+} */
 
-resource "random_id" "randomId" {
+/* resource "random_id" "randomId" {
     keepers = {
         # Generate a new ID only when a new resource group is defined
         resource_group = azurerm_resource_group.generic.name
     }
     
     byte_length = 8
-}
+} */
