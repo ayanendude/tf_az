@@ -7,6 +7,7 @@ resource "azurerm_availability_set" "http" {
   name                = "acceptanceTestAvailabilitySet1"
   location            = "${azurerm_resource_group.generic.location}"
   resource_group_name = "${azurerm_resource_group.generic.name}"
+  managed             = true
 
   tags = {
     environment = "DemoTest"

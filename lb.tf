@@ -14,7 +14,7 @@ resource "azurerm_lb" "http" {
   frontend_ip_configuration {
     name                 = "PublicIPAddress"
     public_ip_address_id = "${azurerm_public_ip.httplb.id}"
-    subnet_id            = azurerm_subnet.http.id
+    //subnet_id            = azurerm_subnet.http.id
   }
 }
 

@@ -11,7 +11,7 @@ resource "azurerm_network_interface" "http" {
   resource_group_name = azurerm_resource_group.generic.name
 
   ip_configuration {
-    name                          = "testconfiguration1"
+    name                          = "testconfiguration"
     subnet_id                     = azurerm_subnet.http.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.http.id
@@ -38,7 +38,7 @@ resource "azurerm_virtual_machine" "http" {
   }
 
   storage_os_disk {
-    name              = "myosdisk1"
+    name              = "myosdisk"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }

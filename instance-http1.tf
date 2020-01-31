@@ -1,12 +1,12 @@
 resource "azurerm_public_ip" "http1" {
-  name                = "http-pip"
+  name                = "http-pip1"
   location            = azurerm_resource_group.generic.location
   resource_group_name = azurerm_resource_group.generic.name
   allocation_method   = "Dynamic"
 }
 
 resource "azurerm_network_interface" "http1" {
-  name                = "http-nic"
+  name                = "http-nic1"
   location            = azurerm_resource_group.generic.location
   resource_group_name = azurerm_resource_group.generic.name
 
@@ -43,7 +43,7 @@ resource "azurerm_virtual_machine" "http1" {
   }
 
   os_profile {
-    computer_name  = "hostname"
+    computer_name  = "hostname1"
     admin_username = "testadmin"
     admin_password = "Password1234!"
     custom_data    = file("scripts/first-boot.sh")
