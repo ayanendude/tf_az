@@ -34,9 +34,12 @@ resource "azurerm_lb_rule" "http" {
   backend_port                   = 3389
   frontend_ip_configuration_name = "PublicIPAddress"
   disable_outbound_snat          = true
+  backend_address_pool_id        = "${azurerm_lb_backend_address_pool.http.id}"
+
+
 }
 
-resource "azurerm_lb_outbound_rule" "http" {
+/* resource "azurerm_lb_outbound_rule" "http" {
   resource_group_name     = "${azurerm_resource_group.generic.name}"
   loadbalancer_id         = "${azurerm_lb.http.id}"
   name                    = "OutboundRule"
@@ -46,7 +49,7 @@ resource "azurerm_lb_outbound_rule" "http" {
   frontend_ip_configuration {
     name = "PublicIPAddress"
   }
-}
+} */
 
 resource "azurerm_lb_probe" "http" {
   resource_group_name = "${azurerm_resource_group.generic.name}"

@@ -2,7 +2,7 @@ resource "azurerm_public_ip" "http1" {
   name                = "http-pip1"
   location            = azurerm_resource_group.generic.location
   resource_group_name = azurerm_resource_group.generic.name
-  allocation_method   = "Dynamic"
+  allocation_method   = "Static"
   sku                 = "Standard"
 }
 
