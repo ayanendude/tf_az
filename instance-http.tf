@@ -19,11 +19,13 @@ resource "azurerm_network_interface" "http" {
 }
 
 resource "azurerm_virtual_machine" "http" {
-  name                  = var.vm_name
+  //count                 = 2
+  name                  = var.vm_name//${count.index}
   location              = azurerm_resource_group.generic.location
   resource_group_name   = azurerm_resource_group.generic.name
   network_interface_ids = [azurerm_network_interface.http.id]
   vm_size               = "Standard_B1S"
+   availability_set_id   = azurerm_availability_set.http.id
 
   delete_os_disk_on_termination    = true
   delete_data_disks_on_termination = true

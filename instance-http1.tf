@@ -24,6 +24,7 @@ resource "azurerm_virtual_machine" "http1" {
   resource_group_name   = azurerm_resource_group.generic.name
   network_interface_ids = [azurerm_network_interface.http1.id]
   vm_size               = "Standard_B1S"
+  availability_set_id   = azurerm_availability_set.http.id
 
   delete_os_disk_on_termination    = true
   delete_data_disks_on_termination = true
